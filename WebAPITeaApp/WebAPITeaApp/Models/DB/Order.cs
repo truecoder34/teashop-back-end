@@ -10,11 +10,11 @@ namespace WebAPITeaApp.Models.DB
     public partial class Order
     {
         [Key]
-        public int orderId { get; set; }
-        public DateTime dateTimeProperty { get; set; }
-        public int userId { get; set; }
-        [ForeignKey("userId")]
-        public virtual User user { get; set; }
+        public int OrderId { get; set; }
+        public DateTime DateTimeProperty { get; set; }
+        public int UserId { get; set; }
+        [ForeignKey("UserId")]
+        public virtual User User { get; set; }
 
         //public int Item_Id { get; set; }
         //[ForeignKey("Item_Id")]

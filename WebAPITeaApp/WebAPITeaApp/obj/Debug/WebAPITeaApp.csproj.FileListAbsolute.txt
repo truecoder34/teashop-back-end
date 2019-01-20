@@ -134,3 +134,8 @@ D:\Job\DirtyMoney\Tea_Project\WebAPITeaApp\WebAPITeaApp\bin\System.Web.Cors.dll
 D:\Job\DirtyMoney\Tea_Project\WebAPITeaApp\WebAPITeaApp\bin\System.Web.Http.Cors.dll
 D:\Job\DirtyMoney\Tea_Project\WebAPITeaApp\WebAPITeaApp\bin\System.Web.Http.Cors.xml
 D:\Job\DirtyMoney\Tea_Project\WebAPITeaApp\WebAPITeaApp\obj\Debug\WebAPITeaApp.csprojAssemblyReference.cache
+D:\Job\DirtyMoney\Tea_Project\WebAPITeaApp\WebAPITeaApp\bin\AutoMapper.dll
+D:\Job\DirtyMoney\Tea_Project\WebAPITeaApp\WebAPITeaApp\bin\System.ValueTuple.dll
+D:\Job\DirtyMoney\Tea_Project\WebAPITeaApp\WebAPITeaApp\bin\AutoMapper.pdb
+D:\Job\DirtyMoney\Tea_Project\WebAPITeaApp\WebAPITeaApp\bin\AutoMapper.xml
+D:\Job\DirtyMoney\Tea_Project\WebAPITeaApp\WebAPITeaApp\bin\System.ValueTuple.xml

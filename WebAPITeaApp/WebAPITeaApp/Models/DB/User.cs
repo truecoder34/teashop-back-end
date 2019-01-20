@@ -12,11 +12,11 @@ namespace WebAPITeaApp.Models.DB
     public partial class User
     {
         [Key]
-        public int userId { get; set; }
-        public string name { get; set; }
-        public string surname { get; set; }
-        public string email { get; set; }
-        public int accessMod { get; set; }
+        public int UserId { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string Email { get; set; }
+        public int AccessMod { get; set; }
 
         // One USER - Many Orders
         public User()

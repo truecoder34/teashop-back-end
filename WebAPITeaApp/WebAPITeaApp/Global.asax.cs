@@ -9,6 +9,7 @@ using System.Web.Routing;
 using WebAPITeaApp.Models;
 using System.Data.Entity;
 using WebAPITeaApp.Models.DB;
+using WebAPITeaApp.Translators;
 
 namespace WebAPITeaApp
 {
@@ -18,6 +19,9 @@ namespace WebAPITeaApp
         {
 
             Database.SetInitializer(new TeaShopDbInitializer());
+
+            // Initialize AutoMapper
+            AutoMapperConfig.Initialize();
 
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);

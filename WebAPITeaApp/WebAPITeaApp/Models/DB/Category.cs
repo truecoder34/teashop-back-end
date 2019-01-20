@@ -14,8 +14,8 @@ namespace WebAPITeaApp.Models
             this.Items = new HashSet<Item>();
         }
         [Key]
-        public int categoryId { get; set; }
-        public string name { get; set; }
+        public int CategoryId { get; set; }
+        public string Name { get; set; }
 
         // One Category - Many Items
         public virtual ICollection<Item> Items { get; set; }

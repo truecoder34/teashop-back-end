@@ -13,9 +13,9 @@ namespace WebAPITeaApp.Models.DB
             this.Items = new HashSet<Item>();
         }
         [Key]
-        public int manufacterId { get; set; }
-        public string name { get; set; }
-        public string madeCountry { get; set; }
+        public int ManufacterId { get; set; }
+        public string Name { get; set; }
+        public string MadeCountry { get; set; }
 
         // One Manufacter - Many Items 
         public virtual ICollection<Item> Items { get; set; }

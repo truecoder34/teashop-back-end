@@ -6,6 +6,8 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using WebAPITeaApp.Models.DB;
+using WebAPITeaApp.Dto;
+using AutoMapper;
 
 namespace WebAPITeaApp.Controllers
 {
@@ -23,11 +25,11 @@ namespace WebAPITeaApp.Controllers
         */
         [HttpGet]
         [Route("getItems")]
-        public IEnumerable<Item> GetItems()
+        public IEnumerable<ItemDto> GetItems()
         {
-            List<Item> itemsList = new List<Item>();
-            itemsList = db.Items.ToList<Item>();
-            return itemsList;
+            List<Item> itemsList = db.Items.ToList<Item>();
+            List<ItemDto> itemsDtoList = Mapper.Map<List<Item>, List<ItemDto>>(itemsList);
+            return itemsDtoList;
         }
 
         /*
@@ -35,12 +37,12 @@ namespace WebAPITeaApp.Controllers
          method to get  ITEM by ID from itemsTable
         */
         [HttpGet]
-        [Route("getItem")]
-        public Item GetItem(int id)
+        [Route("getItem/{id}")]
+        public ItemDto GetItem(int id)
         {
-            var bufItem = db.Items.Where(b => b.itemId == id).ToList();
-
-            return bufItem[0];
+            var bufItem = db.Items.Where(b => b.ItemId == id).ToList();
+            ItemDto recievedFromDBItem = Mapper.Map<Item, ItemDto>(bufItem[0]);
+            return recievedFromDBItem;
         }
 
         // POST: api/Catalog

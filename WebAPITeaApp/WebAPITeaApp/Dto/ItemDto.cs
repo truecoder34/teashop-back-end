@@ -7,23 +7,23 @@ namespace WebAPITeaApp.Dto
 {
     public class ItemDto
     {
-        public string name { get; set; }
-        public float cost { get; set; }
-        public string description { get; set; }
+        public string Name { get; set; }
+        public float Cost { get; set; }
+        public string Description { get; set; }
 
-        public int categoryId { get; set; }
-        public int manufacterId { get; set; }
-        public string imageLink { get; set; }
+        public int CategoryId { get; set; }
+        public int ManufacterId { get; set; }
+        public string ImageLink { get; set; }
 
-        public ItemDto(string nm, float cst, string dsc,
-                        int cat_id, int man_id, string img_link)
-        {
-            name = nm;
-            cost = cst;
-            description = dsc;
-            categoryId = cat_id;
-            manufacterId = man_id;
-            imageLink = img_link;
-        }
+        //public ItemDto(string name, float cost, string description,
+        //                int cat_id, int man_id, string img_link)
+        //{
+        //    Name = name;
+        //    Cost = cost;
+        //    Description = description;
+        //    CategoryId = cat_id;
+        //    ManufacterId = man_id;
+        //    ImageLink = img_link;
+        //}
     }
 }

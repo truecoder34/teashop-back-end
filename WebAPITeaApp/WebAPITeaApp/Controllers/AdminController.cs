@@ -8,6 +8,7 @@ using System.Web.Http.Cors;
 using WebAPITeaApp.Models.DB;
 using WebAPITeaApp.Dto;
 using System.Data.Entity.Migrations;
+using AutoMapper;
 
 namespace WebAPITeaApp.Controllers
 {
@@ -23,16 +24,11 @@ namespace WebAPITeaApp.Controllers
         [Route("addItem")]
         public HttpResponseMessage AddItem([FromBody] ItemDto itemDto)
         {
-            Item itemToAdd = new Item();
-            itemToAdd.name = itemDto.name;
-            itemToAdd.cost = itemDto.cost;
-            itemToAdd.description = itemDto.description;
-            itemToAdd.categoryId = itemDto.categoryId;
-            itemToAdd.manufacterId = itemDto.manufacterId;
-            itemToAdd.previewImg = itemDto.imageLink;      
+            // Get itemDTO - Map to Item - Add to DB
+            Item recievedFromDBItem = Mapper.Map<ItemDto, Item>(itemDto);  
             try
             {
-                db.Items.Add(itemToAdd);
+                db.Items.Add(recievedFromDBItem);
                 db.SaveChanges();
                 return Request.CreateResponse(HttpStatusCode.OK, "Ok");
             }
@@ -48,17 +44,14 @@ namespace WebAPITeaApp.Controllers
         [Route("updateItem/{id}")]
         public HttpResponseMessage UpdateItem(int id, [FromBody] ItemDto itemDto)
         {
-            // Get NOTE from tb.ITMENS by ID
-            var bufItem = db.Items.Where(b => b.itemId == id).ToList();
-            bufItem[0].cost = itemDto.cost;
-            bufItem[0].name = itemDto.name;
-            bufItem[0].description = itemDto.description;
-            bufItem[0].previewImg = itemDto.imageLink;
-            bufItem[0].categoryId = itemDto.categoryId;
-            bufItem[0].manufacterId = itemDto.manufacterId;
+            // Get NOTE from tb.ITMENS by ID , type from DB - ITEM 
+            var bufItem = db.Items.Where(b => b.ItemId == id).ToList();
+
+            // Get itemDTO - transform to DTO
+            Item recievedFromDBAndUpdatedItem = Mapper.Map<ItemDto, Item> (itemDto);
             try
             {
-                db.Items.AddOrUpdate(bufItem[0]);
+                db.Items.AddOrUpdate(recievedFromDBAndUpdatedItem);
                 db.SaveChanges();
                 return Request.CreateResponse(HttpStatusCode.OK, "Ok");
             }
@@ -76,7 +69,7 @@ namespace WebAPITeaApp.Controllers
         public HttpResponseMessage DeleteItem(int id)
         {
             // Get NOTE from tb.ITMENS by ID
-            var bufItem = db.Items.Where(b => b.itemId == id).ToList();
+            var bufItem = db.Items.Where(b => b.ItemId == id).ToList();
             
             try
             {

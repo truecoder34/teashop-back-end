@@ -7,6 +7,7 @@ using System.Web.Http;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
 
+
 namespace WebAPITeaApp
 {
     public static class WebApiConfig
@@ -29,6 +30,8 @@ namespace WebAPITeaApp
 
             // Маршруты Web API
             config.MapHttpAttributeRoutes();
+
+            
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
