@@ -21,6 +21,7 @@ namespace WebAPITeaApp.Controllers
 
         // Add new Item
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [Route("addItem")]
         public HttpResponseMessage AddItem([FromBody] ItemDto itemDto)
         {
@@ -41,6 +42,7 @@ namespace WebAPITeaApp.Controllers
         // UPDATE CURRENT ITEM
         // PUT: api/Admin/5
         [HttpPut]
+        [Authorize(Roles = "Admin")]
         [Route("updateItem/{id}")]
         public HttpResponseMessage UpdateItem(int id, [FromBody] ItemDto itemDto)
         {
@@ -65,6 +67,7 @@ namespace WebAPITeaApp.Controllers
         // DELETE CURRENT ITEM
         // DELETE: api/Admin/5
         [HttpDelete]
+        [Authorize(Roles = "Admin")]
         [Route("deleteItem/{id}")]
         public HttpResponseMessage DeleteItem(int id)
         {
