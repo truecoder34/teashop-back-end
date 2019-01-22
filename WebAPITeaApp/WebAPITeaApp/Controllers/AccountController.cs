@@ -336,9 +336,22 @@ namespace WebAPITeaApp.Controllers
             {
                 return GetErrorResult(result);
             }
+            else
+            {
+                if(model.Role == "Admin")
+                {
+                    UserManager.AddToRole(user.Id,"Admin");
+                }
+                else
+                {
+                    UserManager.AddToRole(user.Id, "User");
+                }
+            }
 
             return Ok();
         }
+
+        // 
 
         // POST api/Account/RegisterExternal
         [OverrideAuthentication]

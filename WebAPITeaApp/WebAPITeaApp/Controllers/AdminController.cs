@@ -14,6 +14,7 @@ namespace WebAPITeaApp.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     [RoutePrefix("api/admin")]
+    [Authorize(Roles ="Admin")]
     public class AdminController : ApiController
     {
         //Connect to DataBase
