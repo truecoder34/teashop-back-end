@@ -43,10 +43,10 @@ namespace WebAPITeaApp.Controllers
         // PUT: api/Admin/5
         [HttpPut]
         [Route("updateItem/{id}")]
-        public HttpResponseMessage UpdateItem(int id, [FromBody] ItemDto itemDto)
+        public HttpResponseMessage UpdateItem(Guid id, [FromBody] ItemDto itemDto)
         {
             // Get NOTE from tb.ITMENS by ID , type from DB - ITEM 
-            var bufItem = db.Items.Where(b => b.ItemId == id).ToList();
+            var bufItem = db.Items.Where(b => b.Id == id).ToList();
 
             // Get itemDTO - transform to DTO
             Item recievedFromDBAndUpdatedItem = Mapper.Map<ItemDto, Item> (itemDto);
@@ -67,10 +67,10 @@ namespace WebAPITeaApp.Controllers
         // DELETE: api/Admin/5
         [HttpDelete]
         [Route("deleteItem/{id}")]
-        public HttpResponseMessage DeleteItem(int id)
+        public HttpResponseMessage DeleteItem(Guid id)
         {
             // Get NOTE from tb.ITMENS by ID
-            var bufItem = db.Items.Where(b => b.ItemId == id).ToList();
+            var bufItem = db.Items.Where(b => b.Id == id).ToList();
             
             try
             {

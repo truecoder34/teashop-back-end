@@ -1,2 +1,3 @@
 .gitignore
 WebAPITeaApp/packages
+WebAPITeaApp/obj/Debug

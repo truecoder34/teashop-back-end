@@ -7,10 +7,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebAPITeaApp.Models.DB
 {
-    public partial class Item
+    public partial class Item : Entity
     {
         [Key]
-        public int ItemId { get; set; }
+        public int IdOfNoteInTable { get; set; }
+        //public Guid ItemId { get; set; }
         public float Cost { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

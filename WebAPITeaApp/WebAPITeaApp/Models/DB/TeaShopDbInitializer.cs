@@ -76,6 +76,7 @@ namespace WebAPITeaApp.Models.DB
             context.SaveChanges();
 
             User buf1 = new User();
+            buf1.UserId = Guid.NewGuid();
             buf1.Name = "testName1";
             buf1.Surname = "testSurname1";
             buf1.AccessMod = 0;
@@ -83,6 +84,7 @@ namespace WebAPITeaApp.Models.DB
             context.Users.Add(buf1);
 
             User buf2 = new User();
+            buf2.UserId = Guid.NewGuid();
             buf2.Name = "testName2";
             buf2.Surname = "testSurname2";
             buf2.AccessMod = 0;
@@ -93,6 +95,7 @@ namespace WebAPITeaApp.Models.DB
 
             context.Items.Add(new Models.DB.Item
             {
+                Id = Guid.NewGuid(),
                 Name = "Да Хун Пао",
                 CategoryId = 1,
                 ManufacterId = 1,
@@ -102,6 +105,7 @@ namespace WebAPITeaApp.Models.DB
 
             context.Items.Add(new Models.DB.Item
             {
+                Id = Guid.NewGuid(),
                 Name = "Дян Хун",
                 CategoryId = 1,
                 ManufacterId = 1,
@@ -111,6 +115,7 @@ namespace WebAPITeaApp.Models.DB
 
             context.Items.Add(new Models.DB.Item
             {
+                Id = Guid.NewGuid(),
                 Name = "Да И 8592",
                 CategoryId = 1,
                 ManufacterId = 3,
@@ -120,6 +125,7 @@ namespace WebAPITeaApp.Models.DB
 
             context.Items.Add(new Models.DB.Item
             {
+                Id = Guid.NewGuid(),
                 Name = "Чайник №41",
                 CategoryId = 2,
                 ManufacterId = 2,
@@ -129,6 +135,7 @@ namespace WebAPITeaApp.Models.DB
 
             context.Items.Add(new Models.DB.Item
             {
+                Id = Guid.NewGuid(),
                 Name = "Чайник №35",
                 CategoryId = 2,
                 ManufacterId = 2,
@@ -138,6 +145,7 @@ namespace WebAPITeaApp.Models.DB
 
             context.Items.Add(new Models.DB.Item
             {
+                Id = Guid.NewGuid(),
                 Name = "Гайвань №4",
                 CategoryId = 3,
                 ManufacterId = 3,
@@ -147,6 +155,7 @@ namespace WebAPITeaApp.Models.DB
 
             context.Items.Add(new Models.DB.Item
             {
+                Id = Guid.NewGuid(),
                 Name = "Гайвань №3",
                 CategoryId = 3,
                 ManufacterId = 3,
@@ -156,6 +165,7 @@ namespace WebAPITeaApp.Models.DB
 
             context.Items.Add(new Models.DB.Item
             {
+                Id = Guid.NewGuid(),
                 Name = "Пиалка №8",
                 CategoryId = 4,
                 ManufacterId = 4,
@@ -165,6 +175,7 @@ namespace WebAPITeaApp.Models.DB
 
             context.Items.Add(new Models.DB.Item
             {
+                Id = Guid.NewGuid(),
                 Name = "Сливник №5",
                 CategoryId = 5,
                 ManufacterId = 4,
@@ -174,6 +185,7 @@ namespace WebAPITeaApp.Models.DB
 
             context.Items.Add(new Models.DB.Item
             {
+                Id = Guid.NewGuid(),
                 Name = "Чабань №6",
                 CategoryId = 6,
                 ManufacterId = 4,
@@ -183,6 +195,7 @@ namespace WebAPITeaApp.Models.DB
 
             context.Items.Add(new Models.DB.Item
             {
+                Id = Guid.NewGuid(),
                 Name = "Фигурка Хотэй",
                 CategoryId = 7,
                 ManufacterId = 4,
@@ -195,28 +208,32 @@ namespace WebAPITeaApp.Models.DB
 
             context.Orders.Add(new Models.DB.Order
             {
+                OrderId = Guid.NewGuid(),
                 DateTimeProperty = DateTime.Now,
-                UserId = 1
+                UserId = buf1.UserId
             });
 
             context.SaveChanges();
 
             context.Photos.Add(new Models.DB.Photo
             {
+                PhotoId = Guid.NewGuid(),
                 LinkPhoto = "linkToPhoto1",
-                ItemId = 1
+                IdOfNoteInTable = 1
             });
 
             context.Photos.Add(new Models.DB.Photo
             {
+                PhotoId = Guid.NewGuid(),
                 LinkPhoto = "linkToPhoto2",
-                ItemId = 2
+                IdOfNoteInTable = 3
             });
 
             context.Photos.Add(new Models.DB.Photo
             {
+                PhotoId = Guid.NewGuid(),
                 LinkPhoto = "linkToPhoto3",
-                ItemId = 3
+                IdOfNoteInTable = 2
             });
             context.SaveChanges();
         }

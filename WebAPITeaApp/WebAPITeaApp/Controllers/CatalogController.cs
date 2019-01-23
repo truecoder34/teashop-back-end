@@ -38,9 +38,9 @@ namespace WebAPITeaApp.Controllers
         */
         [HttpGet]
         [Route("getItem/{id}")]
-        public ItemDto GetItem(int id)
+        public ItemDto GetItem(Guid id)
         {
-            var bufItem = db.Items.Where(b => b.ItemId == id).ToList();
+            var bufItem = db.Items.Where(b => b.Id == id).ToList();
             ItemDto recievedFromDBItem = Mapper.Map<Item, ItemDto>(bufItem[0]);
             return recievedFromDBItem;
         }

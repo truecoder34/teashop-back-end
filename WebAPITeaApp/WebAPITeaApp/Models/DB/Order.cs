@@ -7,12 +7,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebAPITeaApp.Models.DB
 {
-    public partial class Order
+    public partial class Order : Entity
     {
         [Key]
-        public int OrderId { get; set; }
+        public Guid OrderId { get; set; }
         public DateTime DateTimeProperty { get; set; }
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual User User { get; set; }
 
