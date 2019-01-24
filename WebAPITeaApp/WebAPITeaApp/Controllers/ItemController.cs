@@ -13,18 +13,18 @@ namespace WebAPITeaApp.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     [RoutePrefix("api/catalog")]
-    public class CatalogController : ApiController
+    public class ItemController : ApiController
     {
 
         //Connect to DataBase
         TeaShopContext db = new TeaShopContext();
 
         /*
-         GET: api/Catalog
+         GET: api/items
          method to get all ITEMS from itemsTable
         */
         [HttpGet]
-        [Route("getItems")]
+        [Route("items")]
         public IEnumerable<ItemDto> GetItems()
         {
             List<Item> itemsList = db.Items.ToList<Item>();
@@ -33,11 +33,11 @@ namespace WebAPITeaApp.Controllers
         }
 
         /*
-         GET: api/Catalog/5
+         GET: api/items/5
          method to get  ITEM by ID from itemsTable
         */
         [HttpGet]
-        [Route("getItem/{id}")]
+        [Route("items/{id}")]
         public ItemDto GetItem(Guid id)
         {
             var bufItem = db.Items.Where(b => b.GuidId == id).ToList();
@@ -45,19 +45,5 @@ namespace WebAPITeaApp.Controllers
             return recievedFromDBItem;
         }
 
-        // POST: api/Catalog
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT: api/Catalog/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/Catalog/5
-        public void Delete(int id)
-        {
-        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -14,6 +15,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
+using WebAPITeaApp.Dto;
 using WebAPITeaApp.Models;
 using WebAPITeaApp.Providers;
 using WebAPITeaApp.Results;
@@ -21,12 +23,13 @@ using WebAPITeaApp.Results;
 namespace WebAPITeaApp.Controllers
 {
     [Authorize]
-    [RoutePrefix("api/Account")]
-    // [EnableCors(origins: "*", headers: "*", methods: "*")]
+    [RoutePrefix("api/account")]
     public class AccountController : ApiController
     {
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
+
+        ApplicationDbContext db = new ApplicationDbContext();
 
         public AccountController()
         {
@@ -52,6 +55,30 @@ namespace WebAPITeaApp.Controllers
         }
 
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
+
+        // getRole by UserName
+        [HttpPost]
+        [Route("role")]
+        public string GetItem([FromBody] UserDto user)
+        {
+            string userName = user.UserName;
+            var userFromDb = db.Users.Where(b => b.UserName == userName).ToList();
+            var listOfRoles = userFromDb[0].Roles.ToList();
+
+            var rolesFromDb = db.Roles.ToList();
+            string userRoleId = rolesFromDb[1].Id;
+            string adminRoleId = rolesFromDb[0].Id;
+
+            if (listOfRoles[0].RoleId == adminRoleId)
+            {
+                return "Admin";
+            }
+            else
+            {
+                return "User";
+            }
+
+        }
 
         // GET api/Account/UserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
@@ -320,9 +347,9 @@ namespace WebAPITeaApp.Controllers
             return logins;
         }
 
-        // POST api/Account/Register
+        // POST api/account/register
         [AllowAnonymous]
-        [Route("Register")]
+        [Route("register")]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
             if (!ModelState.IsValid)
@@ -503,6 +530,8 @@ namespace WebAPITeaApp.Controllers
                 return HttpServerUtility.UrlTokenEncode(data);
             }
         }
+
+
 
         #endregion
     }

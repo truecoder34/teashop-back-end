@@ -13,16 +13,16 @@ using AutoMapper;
 namespace WebAPITeaApp.Controllers
 {
     // [EnableCors(origins: "*", headers: "*", methods: "*")]
-    [RoutePrefix("api/admin")]
+    [RoutePrefix("api")]
     [Authorize(Roles ="Admin")]
-    public class AdminController : ApiController
+    public class ItemAdminController : ApiController
     {
         //Connect to DataBase
         TeaShopContext db = new TeaShopContext();
 
         // Add new Item
         [HttpPost]
-        [Route("addItem")]
+        [Route("items")]
         public HttpResponseMessage AddItem([FromBody] ItemDto itemDto)
         {
             // Get itemDTO - Map to Item - Add to DB
@@ -46,7 +46,7 @@ namespace WebAPITeaApp.Controllers
         // UPDATE CURRENT ITEM
         // PUT: api/Admin/5
         [HttpPut]
-        [Route("updateItem/{id}")]
+        [Route("items/{id}")]
         public HttpResponseMessage UpdateItem(Guid id, [FromBody] ItemDto itemDto)
         {
             // Get NOTE from tb.ITMENS by ID , type from DB - ITEM 
@@ -72,7 +72,7 @@ namespace WebAPITeaApp.Controllers
         // DELETE CURRENT ITEM
         // DELETE: api/Admin/5
         [HttpDelete]
-        [Route("deleteItem/{id}")]
+        [Route("items/{id}")]
         public HttpResponseMessage DeleteItem(Guid id)
         {
             // Get NOTE from tb.ITMENS by ID
