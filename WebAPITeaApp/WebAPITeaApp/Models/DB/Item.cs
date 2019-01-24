@@ -9,7 +9,7 @@ namespace WebAPITeaApp.Models.DB
 {
     public partial class Item : Entity
     {
-        [Key]
+       [Key]
         public int IdOfNoteInTable { get; set; }
         //public Guid ItemId { get; set; }
         public float Cost { get; set; }

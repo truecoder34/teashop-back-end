@@ -10,6 +10,7 @@ namespace WebAPITeaApp.Models.DB
     public partial class Order : Entity
     {
         [Key]
+        public Guid IdOfNoteInTable { get; set; }
         public Guid OrderId { get; set; }
         public DateTime DateTimeProperty { get; set; }
         public Guid UserId { get; set; }

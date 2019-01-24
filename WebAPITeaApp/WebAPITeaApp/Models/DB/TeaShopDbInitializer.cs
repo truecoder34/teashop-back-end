@@ -76,26 +76,34 @@ namespace WebAPITeaApp.Models.DB
             context.SaveChanges();
 
             User buf1 = new User();
-            buf1.UserId = Guid.NewGuid();
-            buf1.Name = "testName1";
-            buf1.Surname = "testSurname1";
-            buf1.AccessMod = 0;
-            buf1.Email = "testUser1@mail.ru";
+            buf1.UserId = new Guid("4e05432d-0d0c-445a-bc06-c31e828d18c5");
+            buf1.Name = "romanguschin@mail.ru";
+            buf1.Surname = "romanguschin@mail.ru";
+            buf1.AccessMod = 1;
+            buf1.Email = "romanguschin@mail.ru";
             context.Users.Add(buf1);
 
             User buf2 = new User();
-            buf2.UserId = Guid.NewGuid();
-            buf2.Name = "testName2";
-            buf2.Surname = "testSurname2";
+            buf2.UserId = new Guid("17962d7b-40e5-48ab-b39f-b20aa8c595db");
+            buf2.Name = "fffffffffffffffffffff@mail.ru";
+            buf2.Surname = "fffffffffffffffffffff@mail.ru";
             buf2.AccessMod = 0;
-            buf2.Email = "testUser2@mail.ru";
+            buf2.Email = "fffffffffffffffffffff@mail.ru@mail.ru";
             context.Users.Add(buf2);
+
+            User buf3 = new User();
+            buf3.UserId = new Guid("81a1ed9e-d964-4247-9676-48f242904a40");
+            buf3.Name = "kesha_gaz2@mail.ru";
+            buf3.Surname = "kesha_gaz2@mail.ru";
+            buf3.AccessMod = 0;
+            buf3.Email = "kesha_gaz2@mail.ru@mail.ru";
+            context.Users.Add(buf3);
 
             context.SaveChanges();
 
             context.Items.Add(new Models.DB.Item
             {
-                GuidId = Guid.NewGuid(),
+                GuidIdOfItem = Guid.NewGuid(),
                 Name = "Да Хун Пао",
                 CategoryId = 1,
                 ManufacterId = 1,
@@ -105,7 +113,7 @@ namespace WebAPITeaApp.Models.DB
 
             context.Items.Add(new Models.DB.Item
             {
-                GuidId = Guid.NewGuid(),
+                GuidIdOfItem = Guid.NewGuid(),
                 Name = "Дян Хун",
                 CategoryId = 1,
                 ManufacterId = 1,
@@ -115,7 +123,7 @@ namespace WebAPITeaApp.Models.DB
 
             context.Items.Add(new Models.DB.Item
             {
-                GuidId = Guid.NewGuid(),
+                GuidIdOfItem = Guid.NewGuid(),
                 Name = "Да И 8592",
                 CategoryId = 1,
                 ManufacterId = 3,
@@ -125,7 +133,7 @@ namespace WebAPITeaApp.Models.DB
 
             context.Items.Add(new Models.DB.Item
             {
-                GuidId = Guid.NewGuid(),
+                GuidIdOfItem = Guid.NewGuid(),
                 Name = "Чайник №41",
                 CategoryId = 2,
                 ManufacterId = 2,
@@ -135,7 +143,7 @@ namespace WebAPITeaApp.Models.DB
 
             context.Items.Add(new Models.DB.Item
             {
-                GuidId = Guid.NewGuid(),
+                GuidIdOfItem = Guid.NewGuid(),
                 Name = "Чайник №35",
                 CategoryId = 2,
                 ManufacterId = 2,
@@ -145,7 +153,7 @@ namespace WebAPITeaApp.Models.DB
 
             context.Items.Add(new Models.DB.Item
             {
-                GuidId = Guid.NewGuid(),
+                GuidIdOfItem = Guid.NewGuid(),
                 Name = "Гайвань №4",
                 CategoryId = 3,
                 ManufacterId = 3,
@@ -155,7 +163,7 @@ namespace WebAPITeaApp.Models.DB
 
             context.Items.Add(new Models.DB.Item
             {
-                GuidId = Guid.NewGuid(),
+                GuidIdOfItem = Guid.NewGuid(),
                 Name = "Гайвань №3",
                 CategoryId = 3,
                 ManufacterId = 3,
@@ -165,7 +173,7 @@ namespace WebAPITeaApp.Models.DB
 
             context.Items.Add(new Models.DB.Item
             {
-                GuidId = Guid.NewGuid(),
+                GuidIdOfItem = Guid.NewGuid(),
                 Name = "Пиалка №8",
                 CategoryId = 4,
                 ManufacterId = 4,
@@ -175,7 +183,7 @@ namespace WebAPITeaApp.Models.DB
 
             context.Items.Add(new Models.DB.Item
             {
-                GuidId = Guid.NewGuid(),
+                GuidIdOfItem = Guid.NewGuid(),
                 Name = "Сливник №5",
                 CategoryId = 5,
                 ManufacterId = 4,
@@ -185,7 +193,7 @@ namespace WebAPITeaApp.Models.DB
 
             context.Items.Add(new Models.DB.Item
             {
-                GuidId = Guid.NewGuid(),
+                GuidIdOfItem = Guid.NewGuid(),
                 Name = "Чабань №6",
                 CategoryId = 6,
                 ManufacterId = 4,
@@ -195,7 +203,7 @@ namespace WebAPITeaApp.Models.DB
 
             context.Items.Add(new Models.DB.Item
             {
-                GuidId = Guid.NewGuid(),
+                GuidIdOfItem = Guid.NewGuid(),
                 Name = "Фигурка Хотэй",
                 CategoryId = 7,
                 ManufacterId = 4,
@@ -208,6 +216,7 @@ namespace WebAPITeaApp.Models.DB
 
             context.Orders.Add(new Models.DB.Order
             {
+                
                 OrderId = Guid.NewGuid(),
                 DateTimeProperty = DateTime.Now,
                 UserId = buf1.UserId

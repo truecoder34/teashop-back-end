@@ -59,7 +59,7 @@ namespace WebAPITeaApp.Controllers
         // getRole by UserName
         [HttpPost]
         [Route("role")]
-        public string GetItem([FromBody] UserDto user)
+        public IHttpActionResult GetItem([FromBody] UserDto user)
         {
             string userName = user.UserName;
             var userFromDb = db.Users.Where(b => b.UserName == userName).ToList();
@@ -69,13 +69,16 @@ namespace WebAPITeaApp.Controllers
             string userRoleId = rolesFromDb[1].Id;
             string adminRoleId = rolesFromDb[0].Id;
 
+
+
+
             if (listOfRoles[0].RoleId == adminRoleId)
             {
-                return "Admin";
+                return Ok(new { Role = "Admin", UserId = userFromDb[0].Id });
             }
             else
             {
-                return "User";
+                return Ok(new { Role = "User", UserId = userFromDb[0].Id });
             }
 
         }

@@ -30,7 +30,7 @@ namespace WebAPITeaApp.Controllers
 
             // temporarily decision = replace giud to prevent it being zero 
             Guid tempGuid = Guid.NewGuid();
-            recievedFromAdminItem.GuidId = tempGuid;
+            recievedFromAdminItem.GuidIdOfItem = tempGuid;
             try
             {
                 db.Items.Add(recievedFromAdminItem);
@@ -50,15 +50,30 @@ namespace WebAPITeaApp.Controllers
         public HttpResponseMessage UpdateItem(Guid id, [FromBody] ItemDto itemDto)
         {
             // Get NOTE from tb.ITMENS by ID , type from DB - ITEM 
-            var bufItem = db.Items.Where(b => b.GuidId == id).First();
+            var bufItem = db.Items.Where(b => b.GuidIdOfItem == id).First();
+
+            var bufPhotos = db.Photos.Where(b => b.IdOfNoteInTable == bufItem.IdOfNoteInTable).ToList();
 
             // Get itemDTO - transform to DTO
             Item recievedFromDBAndUpdatedItem = Mapper.Map<ItemDto, Item> (itemDto);
-            recievedFromDBAndUpdatedItem.GuidId = bufItem.GuidId;
+            recievedFromDBAndUpdatedItem.GuidIdOfItem = bufItem.GuidIdOfItem;
+
             try
             {
                 db.Items.Remove(bufItem);
                 db.Items.Add(recievedFromDBAndUpdatedItem);
+
+                foreach (Photo elem in bufPhotos)
+                {
+                    Photo photoUpdated = new Photo();
+                    photoUpdated.IdOfNoteInTable = bufItem.IdOfNoteInTable;
+                    photoUpdated.LinkPhoto = elem.LinkPhoto;
+                    photoUpdated.PhotoId = elem.PhotoId;
+
+                    db.Photos.Remove(bufPhotos[0]);
+                    db.Photos.Add(photoUpdated);
+                }
+
                 db.SaveChanges();
                 return Request.CreateResponse(HttpStatusCode.OK, "Ok");
             }
@@ -76,11 +91,17 @@ namespace WebAPITeaApp.Controllers
         public HttpResponseMessage DeleteItem(Guid id)
         {
             // Get NOTE from tb.ITMENS by ID
-            var bufItem = db.Items.Where(b => b.GuidId == id).ToList();
-            
+            var bufItem = db.Items.Where(b => b.GuidIdOfItem == id).First();
+            var bufPhotos = db.Photos.Where(b => b.IdOfNoteInTable == bufItem.IdOfNoteInTable).ToList();
+
             try
             {
-                db.Items.Remove(bufItem[0]);
+                db.Items.Remove(bufItem);
+                foreach(Photo elem in bufPhotos)
+                {
+                    db.Photos.Remove(bufPhotos[0]);
+                }
+                
                 db.SaveChanges();
                 return Request.CreateResponse(HttpStatusCode.OK, "Ok");
             }
