@@ -22,6 +22,7 @@ namespace WebAPITeaApp
 
             var appRoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context.Get<ApplicationDbContext>()));
 
+            // СОЗДАЛ РОЛИИИИИ
             var roleResult = appRoleManager.Create(new IdentityRole("Admin"));
             roleResult = appRoleManager.Create(new IdentityRole("User"));
 

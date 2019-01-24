@@ -275,7 +275,6 @@ C:\Users\vladp\Desktop\WebApi\teashop-back-end\WebAPITeaApp\WebAPITeaApp\bin\ru\
 C:\Users\vladp\Desktop\WebApi\teashop-back-end\WebAPITeaApp\WebAPITeaApp\bin\ru\Microsoft.AspNet.Identity.Owin.resources.dll
 C:\Users\vladp\Desktop\WebApi\teashop-back-end\WebAPITeaApp\WebAPITeaApp\bin\ru\Microsoft.AspNet.Identity.EntityFramework.resources.dll
 C:\Users\vladp\Desktop\WebApi\teashop-back-end\WebAPITeaApp\WebAPITeaApp\bin\ru\System.Web.Http.Owin.resources.dll
-C:\Users\vladp\Desktop\WebApi\teashop-back-end\WebAPITeaApp\WebAPITeaApp\obj\Debug\WebAPITeaApp.csprojAssemblyReference.cache
 C:\Users\vladp\Desktop\WebApi\teashop-back-end\WebAPITeaApp\WebAPITeaApp\obj\Debug\WebAPITeaApp.csproj.CoreCompileInputs.cache
 C:\Users\vladp\Desktop\WebApi\teashop-back-end\WebAPITeaApp\WebAPITeaApp\obj\Debug\WebAPITeaApp.csproj.CopyComplete
 C:\Users\vladp\Desktop\WebApi\teashop-back-end\WebAPITeaApp\WebAPITeaApp\obj\Debug\WebAPITeaApp.dll
