@@ -19,15 +19,7 @@ namespace WebAPITeaApp.Controllers
 
         ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: api/User/5
-        [HttpGet]
-        [Route("getItem/{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        [HttpGet]
+        [HttpPost]
         [Route("getRole")]
         public string GetItem([FromBody] UserDto user)
         {

@@ -20,7 +20,7 @@ namespace WebAPITeaApp
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
 
             // Enable CORS
-            config.EnableCors();
+            // config.EnableCors();
 
             var json = config.Formatters.JsonFormatter;
             json.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;

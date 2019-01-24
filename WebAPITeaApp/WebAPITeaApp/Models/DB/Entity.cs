@@ -8,13 +8,12 @@ namespace WebAPITeaApp.Models.DB
     public class Entity
     {
         // Guid field
-        public Guid Id { get; set; }
+        public Guid GuidId { get; set; }
         // Constructor 
         public Entity()
         {
-            Guid Id = new Guid();
-            Id = Guid.NewGuid();
-        }
-        
+            //Guid GuidId = new Guid();
+            GuidId = Guid.NewGuid();
+        }  
     }
 }

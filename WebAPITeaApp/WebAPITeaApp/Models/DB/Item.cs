@@ -26,7 +26,7 @@ namespace WebAPITeaApp.Models.DB
         public virtual Manufacter Manufacter { get; set; }
 
         // MANY - to - MANY connection to ORDER table
-        public Item()
+        public Item() : base()
         {
             this.Orders = new HashSet<Order>();
             this.Photos = new HashSet<Photo>();

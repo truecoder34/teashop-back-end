@@ -6,7 +6,7 @@ using WebAPITeaApp.Models.DB;
 
 namespace WebAPITeaApp.Dto
 {
-    public class ItemDto : Entity
+    public class ItemDto : EntityDto
     {
         //public Guid Id { get; set; }
         public string Name { get; set; }

@@ -95,7 +95,7 @@ namespace WebAPITeaApp.Models.DB
 
             context.Items.Add(new Models.DB.Item
             {
-                Id = Guid.NewGuid(),
+                GuidId = Guid.NewGuid(),
                 Name = "Да Хун Пао",
                 CategoryId = 1,
                 ManufacterId = 1,
@@ -105,7 +105,7 @@ namespace WebAPITeaApp.Models.DB
 
             context.Items.Add(new Models.DB.Item
             {
-                Id = Guid.NewGuid(),
+                GuidId = Guid.NewGuid(),
                 Name = "Дян Хун",
                 CategoryId = 1,
                 ManufacterId = 1,
@@ -115,7 +115,7 @@ namespace WebAPITeaApp.Models.DB
 
             context.Items.Add(new Models.DB.Item
             {
-                Id = Guid.NewGuid(),
+                GuidId = Guid.NewGuid(),
                 Name = "Да И 8592",
                 CategoryId = 1,
                 ManufacterId = 3,
@@ -125,7 +125,7 @@ namespace WebAPITeaApp.Models.DB
 
             context.Items.Add(new Models.DB.Item
             {
-                Id = Guid.NewGuid(),
+                GuidId = Guid.NewGuid(),
                 Name = "Чайник №41",
                 CategoryId = 2,
                 ManufacterId = 2,
@@ -135,7 +135,7 @@ namespace WebAPITeaApp.Models.DB
 
             context.Items.Add(new Models.DB.Item
             {
-                Id = Guid.NewGuid(),
+                GuidId = Guid.NewGuid(),
                 Name = "Чайник №35",
                 CategoryId = 2,
                 ManufacterId = 2,
@@ -145,7 +145,7 @@ namespace WebAPITeaApp.Models.DB
 
             context.Items.Add(new Models.DB.Item
             {
-                Id = Guid.NewGuid(),
+                GuidId = Guid.NewGuid(),
                 Name = "Гайвань №4",
                 CategoryId = 3,
                 ManufacterId = 3,
@@ -155,7 +155,7 @@ namespace WebAPITeaApp.Models.DB
 
             context.Items.Add(new Models.DB.Item
             {
-                Id = Guid.NewGuid(),
+                GuidId = Guid.NewGuid(),
                 Name = "Гайвань №3",
                 CategoryId = 3,
                 ManufacterId = 3,
@@ -165,7 +165,7 @@ namespace WebAPITeaApp.Models.DB
 
             context.Items.Add(new Models.DB.Item
             {
-                Id = Guid.NewGuid(),
+                GuidId = Guid.NewGuid(),
                 Name = "Пиалка №8",
                 CategoryId = 4,
                 ManufacterId = 4,
@@ -175,7 +175,7 @@ namespace WebAPITeaApp.Models.DB
 
             context.Items.Add(new Models.DB.Item
             {
-                Id = Guid.NewGuid(),
+                GuidId = Guid.NewGuid(),
                 Name = "Сливник №5",
                 CategoryId = 5,
                 ManufacterId = 4,
@@ -185,7 +185,7 @@ namespace WebAPITeaApp.Models.DB
 
             context.Items.Add(new Models.DB.Item
             {
-                Id = Guid.NewGuid(),
+                GuidId = Guid.NewGuid(),
                 Name = "Чабань №6",
                 CategoryId = 6,
                 ManufacterId = 4,
@@ -195,7 +195,7 @@ namespace WebAPITeaApp.Models.DB
 
             context.Items.Add(new Models.DB.Item
             {
-                Id = Guid.NewGuid(),
+                GuidId = Guid.NewGuid(),
                 Name = "Фигурка Хотэй",
                 CategoryId = 7,
                 ManufacterId = 4,

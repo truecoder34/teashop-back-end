@@ -22,6 +22,8 @@ namespace WebAPITeaApp
         // Дополнительные сведения о настройке аутентификации см. на странице https://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {
+            // Connect OWIN CORS - allow ALL CORS
+            app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
             // Настройка контекста базы данных и диспетчера пользователей для использования одного экземпляра на запрос
             app.CreatePerOwinContext(ApplicationDbContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
@@ -30,6 +32,8 @@ namespace WebAPITeaApp
             // и использование файла cookie для временного хранения информации о входах пользователя с помощью стороннего поставщика входа
             app.UseCookieAuthentication(new CookieAuthenticationOptions());
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
+
+            
 
             // Настройка приложения для потока обработки на основе OAuth
             PublicClientId = "self";
@@ -41,10 +45,12 @@ namespace WebAPITeaApp
                 AccessTokenExpireTimeSpan = TimeSpan.FromHours(3),
                 // В рабочем режиме задайте AllowInsecureHttp = false
                 AllowInsecureHttp = true
+                
             };
 
             // Включение использования приложением маркера-носителя для аутентификации пользователей
             app.UseOAuthBearerTokens(OAuthOptions);
+            
 
             // Раскомментируйте приведенные далее строки, чтобы включить вход с помощью сторонних поставщиков входа
             //app.UseMicrosoftAccountAuthentication(
