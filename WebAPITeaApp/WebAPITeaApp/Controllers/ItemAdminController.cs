@@ -30,7 +30,7 @@ namespace WebAPITeaApp.Controllers
 
             // temporarily decision = replace giud to prevent it being zero 
             Guid tempGuid = Guid.NewGuid();
-            recievedFromAdminItem.GuidIdOfItem = tempGuid;
+            recievedFromAdminItem.GuidId = tempGuid;
             try
             {
                 db.Items.Add(recievedFromAdminItem);
@@ -50,13 +50,13 @@ namespace WebAPITeaApp.Controllers
         public HttpResponseMessage UpdateItem(Guid id, [FromBody] ItemDto itemDto)
         {
             // Get NOTE from tb.ITMENS by ID , type from DB - ITEM 
-            var bufItem = db.Items.Where(b => b.GuidIdOfItem == id).First();
+            var bufItem = db.Items.Where(b => b.GuidId == id).First();
 
-            var bufPhotos = db.Photos.Where(b => b.IdOfNoteInTable == bufItem.IdOfNoteInTable).ToList();
+            var bufPhotos = db.Photos.Where(b => b.PhotoId == bufItem.GuidId).ToList();
 
             // Get itemDTO - transform to DTO
             Item recievedFromDBAndUpdatedItem = Mapper.Map<ItemDto, Item> (itemDto);
-            recievedFromDBAndUpdatedItem.GuidIdOfItem = bufItem.GuidIdOfItem;
+            recievedFromDBAndUpdatedItem.GuidId = bufItem.GuidId;
 
             try
             {
@@ -66,7 +66,7 @@ namespace WebAPITeaApp.Controllers
                 foreach (Photo elem in bufPhotos)
                 {
                     Photo photoUpdated = new Photo();
-                    photoUpdated.IdOfNoteInTable = bufItem.IdOfNoteInTable;
+                    photoUpdated.PhotoId = bufItem.GuidId;
                     photoUpdated.LinkPhoto = elem.LinkPhoto;
                     photoUpdated.PhotoId = elem.PhotoId;
 
@@ -91,8 +91,8 @@ namespace WebAPITeaApp.Controllers
         public HttpResponseMessage DeleteItem(Guid id)
         {
             // Get NOTE from tb.ITMENS by ID
-            var bufItem = db.Items.Where(b => b.GuidIdOfItem == id).First();
-            var bufPhotos = db.Photos.Where(b => b.IdOfNoteInTable == bufItem.IdOfNoteInTable).ToList();
+            var bufItem = db.Items.Where(b => b.GuidId == id).First();
+            var bufPhotos = db.Photos.Where(b => b.PhotoId == bufItem.GuidId).ToList();
 
             try
             {

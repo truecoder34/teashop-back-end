@@ -20,22 +20,23 @@ namespace WebAPITeaApp.Controllers
         // POST: api/Order
         [HttpPost]
         [Route("orders")]
-        public HttpResponseMessage AddOrder([FromBody]OrderDto orderDto)
+        public HttpResponseMessage AddOrder([FromBody]  OrderDto orderDto)
         {
             // Put DATA in ORDERS table
             Guid orderId = Guid.NewGuid();
+
+            Order bufferOrder = new Order();
+            bufferOrder.OrderId = orderId;
+            bufferOrder.DateTimeProperty = orderDto.DateTimeOfOrder;
+            bufferOrder.User = db.Users.Where(b => b.UserId == orderDto.UserGuid).First();
+
             foreach (var elem in orderDto.ItemsGuidsList)
-            {
-                db.Orders.Add(new Order
-                {
-                    IdOfNoteInTable = Guid.NewGuid(),
-                    OrderId = orderId,
-                    DateTimeProperty = orderDto.DateTimeOfOrder,
-                    UserId = orderDto.UserGuid,
-                    GuidIdOfItem = elem
-                });
-                db.SaveChanges();
+            { 
+                bufferOrder.Items.Add(db.Items.Where(b => b.GuidId == elem).First());        
             }
+            db.Orders.Add(bufferOrder);
+            db.SaveChanges();
+
             return Request.CreateResponse(HttpStatusCode.OK, "Ok");
         }
 

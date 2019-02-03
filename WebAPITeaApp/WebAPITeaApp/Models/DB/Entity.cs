@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
 namespace WebAPITeaApp.Models.DB
 {
-    public class Entity
+    abstract public class Entity
     {
-        // Guid field
-        public Guid GuidIdOfItem { get; set; }
+        // Guid field - field to make note in table UN
+        [Key]
+        public Guid GuidId{ get; set; }
         // Constructor 
         public Entity()
         {
-            //Guid GuidId = new Guid();
-            GuidIdOfItem = Guid.NewGuid();
+            GuidId = Guid.NewGuid();
         }  
     }
 }

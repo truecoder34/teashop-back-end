@@ -10,7 +10,7 @@ namespace WebAPITeaApp.Models.DB
     {
         public Manufacter()
         {
-            this.Items = new HashSet<Item>();
+            this.Items = new List<Item>();
         }
         [Key]
         public int ManufacterId { get; set; }

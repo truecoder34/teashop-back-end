@@ -13,11 +13,12 @@ namespace WebAPITeaApp.Controllers
     public class ValuesController : ApiController
     {
 
+
         TeaShopContext db = new TeaShopContext();
         // GET api/values
-        public IEnumerable<Category> Get()
+        public IEnumerable<Order> Get()
         {
-            return db.Categories;
+            return db.Orders;
         }
 
         // GET api/values/5
@@ -36,7 +37,7 @@ namespace WebAPITeaApp.Controllers
         {
         }
 
-        // DELETE api/values/5
+        // DELETE api/values/5и
         public void Delete(int id)
         {
         }

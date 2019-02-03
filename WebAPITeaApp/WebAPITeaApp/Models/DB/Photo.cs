@@ -15,8 +15,8 @@ namespace WebAPITeaApp.Models.DB
         //public string Name_Photo { get; set; }
 
         // MANY Photo - One Item
-        public Nullable<int> IdOfNoteInTable { get; set; }
-        [ForeignKey("IdOfNoteInTable")]
+        public Guid GuidId { get; set; }
+        [ForeignKey("GuidId")]
         public virtual Item Item { get; set; }
     }
 }

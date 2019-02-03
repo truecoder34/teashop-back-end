@@ -281,4 +281,3 @@ C:\Users\vladp\Desktop\WebApi\teashop-back-end\WebAPITeaApp\WebAPITeaApp\obj\Deb
 C:\Users\vladp\Desktop\WebApi\teashop-back-end\WebAPITeaApp\WebAPITeaApp\obj\Debug\WebAPITeaApp.pdb
 C:\Users\vladp\Desktop\WebApi\teashop-back-end\WebAPITeaApp\WebAPITeaApp\bin\Microsoft.Owin.Cors.dll
 C:\Users\vladp\Desktop\WebApi\teashop-back-end\WebAPITeaApp\WebAPITeaApp\bin\Microsoft.Owin.Cors.xml
-C:\Users\vladp\Desktop\WebApi\teashop-back-end\WebAPITeaApp\WebAPITeaApp\obj\Debug\WebAPITeaApp.csprojAssemblyReference.cache

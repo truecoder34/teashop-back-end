@@ -9,27 +9,31 @@ namespace WebAPITeaApp.Models.DB
 {
     public partial class Item : Entity
     {
-       [Key]
-        public int IdOfNoteInTable { get; set; }
-        //public Guid ItemId { get; set; }
+        // PK - field, UNIQUE ID of ITEM
+        //[Key]
+        //public override Guid GuidId { get; set; }
+
         public float Cost { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string ImageLink { get; set; }
 
-        public int CategoryId { get; set; }
-        [ForeignKey("CategoryId")]
-        public virtual Category Vategory { get; set; }
+        // FK - field
+        //[ForeignKey("CategoryId")]
+        //public int CategoryId { get; set; }
+        public virtual Category Category { get; set; }
 
-        public int ManufacterId { get; set; }
-        [ForeignKey("ManufacterId")]
+        // FK - field
+        //[ForeignKey("ManufacterId")]
+        //public Manufacter 
         public virtual Manufacter Manufacter { get; set; }
 
         // MANY - to - MANY connection to ORDER table
+        // ONE Item - MANY Photo connection to PHOTOS table
         public Item() : base()
         {
-            this.Orders = new HashSet<Order>();
-            this.Photos = new HashSet<Photo>();
+            this.Orders = new List<Order>();
+            this.Photos = new List<Photo>();
         }
         public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<Photo> Photos { get; set; }

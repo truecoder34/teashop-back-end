@@ -11,7 +11,7 @@ namespace WebAPITeaApp.Models
     {
         public Category()
         {
-            this.Items = new HashSet<Item>();
+            this.Items = new List<Item>();
         }
         [Key]
         public int CategoryId { get; set; }

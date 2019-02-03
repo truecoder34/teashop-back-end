@@ -7,6 +7,9 @@ namespace WebAPITeaApp.Dto
 {
     public class UserDto
     {
+        // NON REQURED Fields to WORK with fields in SYSTEM AspNetUsers Table
         public string UserName { get; set; }
+        
+        
     }
 }

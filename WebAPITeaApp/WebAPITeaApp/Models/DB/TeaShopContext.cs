@@ -21,6 +21,7 @@ namespace WebAPITeaApp.Models.DB
         public DbSet<Manufacter> Manufacters { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<UserInfo> UsersInfo { get; set; }
         public DbSet<Photo> Photos { get; set; }
     }
 }

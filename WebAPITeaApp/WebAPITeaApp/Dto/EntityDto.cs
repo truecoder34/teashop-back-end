@@ -7,6 +7,6 @@ namespace WebAPITeaApp.Dto
 {
     public class EntityDto
     {
-        public Guid GuidId { get; set; }
+        public Guid GuidIdOfItem { get; set; }
     }
 }
