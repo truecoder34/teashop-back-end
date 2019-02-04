@@ -12,18 +12,10 @@ namespace WebAPITeaApp.Models.DB
         // PK - field, UNIQUE ID of ORDER
         [Key]
         public Guid OrderId { get; set; }
-
+        public string State { get; set; }
         public DateTime DateTimeProperty { get; set; }
-
-        //[ForeignKey("User")]
-        //public Guid UserRefId { get; set; }
+    
         public virtual User User { get; set; }
-
-        // Relation to unique Item ID from Items table
-        //[ForeignKey("Item")]
-        //public int GuidRefId { get; set; }
-        //public virtual Item Item { get; set; }
-
 
         // MANY - to - MANY connection to ITEM table
         public Order()

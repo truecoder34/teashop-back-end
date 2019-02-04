@@ -17,7 +17,7 @@ namespace WebAPITeaApp.Models.DB
         public string Surname { get; set; }
         public string Email { get; set; }
         public int AccessMod { get; set; }
-        public string Address { get; set; }
+        //public string Address { get; set; }
 
         // One USER - Many Orders
         public User()

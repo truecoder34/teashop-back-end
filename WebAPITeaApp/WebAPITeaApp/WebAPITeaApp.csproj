@@ -236,6 +236,7 @@
     <Compile Include="Dto\EntityDto.cs" />
     <Compile Include="Dto\ItemDto.cs" />
     <Compile Include="Dto\OrderDto.cs" />
+    <Compile Include="Dto\StateDto.cs" />
     <Compile Include="Dto\UserDto.cs" />
     <Compile Include="Dto\UserInfoDto.cs" />
     <Compile Include="Global.asax.cs">

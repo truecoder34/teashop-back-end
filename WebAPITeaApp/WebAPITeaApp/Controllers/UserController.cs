@@ -14,7 +14,7 @@ namespace WebAPITeaApp.Controllers
 
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     [RoutePrefix("api")]
-    //[Authorize(Roles = "User")]
+    [Authorize(Roles = "User")]
     public class UserController : ApiController
     {
         TeaShopContext db = new TeaShopContext();

@@ -20,15 +20,29 @@ namespace WebAPITeaApp.Controllers
         // POST: api/Order
         [HttpPost]
         [Route("orders")]
+        [Authorize(Roles = "User")]
         public HttpResponseMessage AddOrder([FromBody]  OrderDto orderDto)
         {
+            // Get INFO about user from USERINFO table by userGuid, and put it into User Table
+            UserInfo userInfo = db.UsersInfo.Where(b => b.UserId == orderDto.UserGuid).First();
+            User userMakingOrder = new User();
+            userMakingOrder.UserId = userInfo.UserId;
+            userMakingOrder.Name = userInfo.Name;
+            userMakingOrder.Surname = userInfo.Surname;
+            userMakingOrder.Email = userInfo.Email;
+            userMakingOrder.AccessMod = 0;
+
+            db.Users.Add(userMakingOrder);
+            db.SaveChanges();
+
+
             // Put DATA in ORDERS table
             Guid orderId = Guid.NewGuid();
-
             Order bufferOrder = new Order();
             bufferOrder.OrderId = orderId;
             bufferOrder.DateTimeProperty = orderDto.DateTimeOfOrder;
             bufferOrder.User = db.Users.Where(b => b.UserId == orderDto.UserGuid).First();
+            bufferOrder.State = "Создан";
 
             foreach (var elem in orderDto.ItemsGuidsList)
             { 
@@ -41,21 +55,67 @@ namespace WebAPITeaApp.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
-        [Route("orders")]
-        public List<Order> GetOrders()
+        [Route("orders/{id}")]
+        [Authorize(Roles = "User")]
+        public List<OrderDto> GetUsersOrders(Guid id)
         {
-            List<Order> order = db.Orders.ToList();
-            //List<OrderDto> orderDtoList = new List<OrderDto>();
-
-            //foreach (Order elem in order)
-            //{
-               
-            //}
-
-            return order;
+            List<Order> order = db.Orders.Where(b => b.User.UserId == id).ToList();
+            List<OrderDto> orderDtoList = new List<OrderDto>();
+            foreach (Order elem in order)
+            {
+                OrderDto orderDto = new OrderDto();
+                orderDto.DateTimeOfOrder = elem.DateTimeProperty;
+                orderDto.UserGuid = elem.User.UserId;
+                orderDto.State = elem.State;
+                orderDto.ItemsGuidsList = new List<Guid>();
+                foreach (Item item in elem.Items)
+                {
+                    orderDto.ItemsGuidsList.Add(item.GuidId);
+                }
+                orderDtoList.Add(orderDto);
+            }
+            return orderDtoList;
         }
 
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        [Route("orders")]
+        public List<OrderDto> GetOrders()
+        {
+            List<Order> order = db.Orders.ToList();           
+            List<OrderDto> orderDtoList = new List<OrderDto>();
+            foreach (Order elem in order)
+            {
+                OrderDto orderDto = new OrderDto();
+                orderDto.DateTimeOfOrder = elem.DateTimeProperty;
+                orderDto.UserGuid = elem.User.UserId;
+                orderDto.State = elem.State;
+                orderDto.ItemsGuidsList = new List<Guid>();
+                foreach (Item item in elem.Items)
+                {
+                    orderDto.ItemsGuidsList.Add(item.GuidId);
+                }
+                orderDtoList.Add(orderDto);
+            }
+            return orderDtoList;
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [Route("orders/update")]
+        public HttpResponseMessage updateState([FromBody] StateDto stateDto)
+        {
+            Order orderFromDb = db.Orders.Where(b => b.OrderId == stateDto.OrderId).First();
+
+            orderFromDb.State = stateDto.State;
+
+            List<Order> bufferList = db.Orders.ToList();
+
+            //db.Orders.Add(orderFromDb);
+            db.SaveChanges();
+
+            return Request.CreateResponse(HttpStatusCode.OK, "State Updated");
+        }
 
     }
 }

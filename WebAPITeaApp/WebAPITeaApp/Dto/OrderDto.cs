@@ -9,6 +9,10 @@ namespace WebAPITeaApp.Dto
     {
         public Guid UserGuid { get; set; }
         public DateTime DateTimeOfOrder { get; set; }
+
         public ICollection<Guid> ItemsGuidsList { get; set; }
+
+        public string State { get; set; }
+
     }
 }

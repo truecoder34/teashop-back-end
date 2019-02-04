@@ -70,13 +70,13 @@ namespace WebAPITeaApp.Models.DB
 
             context.SaveChanges();
 
-            User buf1 = new User();
-            buf1.UserId = new Guid("4e05432d-0d0c-445a-bc06-c31e828d18c5");
-            buf1.Name = "romanguschin@mail.ru";
-            buf1.Surname = "romanguschin@mail.ru";
-            buf1.AccessMod = 1;
-            buf1.Email = "romanguschin@mail.ru";
-            context.Users.Add(buf1);
+            //User buf1 = new User();
+            //buf1.UserId = new Guid("4e05432d-0d0c-445a-bc06-c31e828d18c5");
+            //buf1.Name = "romanguschin@mail.ru";
+            //buf1.Surname = "romanguschin@mail.ru";
+            //buf1.AccessMod = 1;
+            //buf1.Email = "romanguschin@mail.ru";
+            //context.Users.Add(buf1);
 
             //User buf2 = new User();
             //buf2.UserId = new Guid("17962d7b-40e5-48ab-b39f-b20aa8c595db");
@@ -86,13 +86,13 @@ namespace WebAPITeaApp.Models.DB
             //buf2.Email = "fffffffffffffffffffff@mail.ru@mail.ru";
             //context.Users.Add(buf2);
 
-            //User buf3 = new User();
-            //buf3.UserId = new Guid("81a1ed9e-d964-4247-9676-48f242904a40");
-            //buf3.Name = "kesha_gaz2@mail.ru";
-            //buf3.Surname = "kesha_gaz2@mail.ru";
-            //buf3.AccessMod = 0;
-            //buf3.Email = "kesha_gaz2@mail.ru@mail.ru";
-            //context.Users.Add(buf3);
+            User bufUser3 = new User();
+            bufUser3.UserId = new Guid("81a1ed9e-d964-4247-9676-48f242904a40");
+            bufUser3.Name = "kesha_gaz2@mail.ru";
+            bufUser3.Surname = "kesha_gaz2@mail.ru";
+            bufUser3.AccessMod = 0;
+            bufUser3.Email = "kesha_gaz2@mail.ru@mail.ru";
+            context.Users.Add(bufUser3);
 
             context.SaveChanges();
 
@@ -136,7 +136,7 @@ namespace WebAPITeaApp.Models.DB
             bufItem2.Name = "Дян Хун";
             bufItem2.Cost = 1200;
             bufItem2.Description = "Китайский чай, Красный";
-            bufItem2.ImageLink = "................";
+            bufItem2.ImageLink = "http://imperatormin.ru/u/product/single/5aa3c0a42d04e.jpg";
             bufItem2.Manufacter = context.Manufacters.Where(b => b.ManufacterId == 3).First();
             bufItem2.Category = context.Categories.Where(b => b.CategoryId == 1).First();
 
@@ -146,7 +146,7 @@ namespace WebAPITeaApp.Models.DB
             bufItem3.GuidId = Guid.NewGuid();
             bufItem3.Name = "Да И 8592";
             bufItem3.Cost = 2500;
-            bufItem3.Description = "Шу Пуэр, Блин 357 грамм. Фабрика: Да И";
+            bufItem3.Description = "http://imperatormin.ru/u/product/single/5a7ecb086cbae.jpg";
             bufItem3.ImageLink = "................";
             bufItem3.Manufacter = context.Manufacters.Where(b => b.ManufacterId == 2).First();
             bufItem3.Category = context.Categories.Where(b => b.CategoryId == 1).First();
@@ -159,7 +159,7 @@ namespace WebAPITeaApp.Models.DB
                 Name = "Чайник №41",
                 Cost = 6500,
                 Description = "Чайник из исинской глины, коричневый",
-                ImageLink = "................",
+                ImageLink = "http://imperatormin.ru/u/product/card/59c9214093167.jpg",
                 Manufacter = context.Manufacters.Where(b => b.ManufacterId == 4).First(),
                 Category = context.Categories.Where(b => b.CategoryId == 2).First()
 
@@ -171,7 +171,7 @@ namespace WebAPITeaApp.Models.DB
                 Name = "Чайник №35",
                 Cost = 30000,
                 Description = "Чайник из нефрита",
-                ImageLink = "................",
+                ImageLink = "http://imperatormin.ru/u/product/card/5ac0ed20b9cd4.jpg",
                 Manufacter = context.Manufacters.Where(b => b.ManufacterId == 4).First(),
                 Category = context.Categories.Where(b => b.CategoryId == 2).First()
             });
@@ -182,7 +182,7 @@ namespace WebAPITeaApp.Models.DB
                 Name = "Гайвань №4",
                 Cost = 1200, 
                 Description = "Гайвань, глазурированая глина",
-                ImageLink = "................",
+                ImageLink = "http://imperatormin.ru/u/product/card/5b5a1104e0073.jpg",
                 Manufacter = context.Manufacters.Where(b => b.ManufacterId == 3).First(),
                 Category = context.Categories.Where(b => b.CategoryId == 3).First()
             });
@@ -193,7 +193,7 @@ namespace WebAPITeaApp.Models.DB
                 Name = "Гайвань №3",
                 Cost = 1000,
                 Description = "Гайвань, белый фарфорб синий узор",
-                ImageLink = "................",
+                ImageLink = "http://imperatormin.ru/u/product/card/5adc644c1a4fd.jpg",
                 Manufacter = context.Manufacters.Where(b => b.ManufacterId == 1).First(),
                 Category = context.Categories.Where(b => b.CategoryId == 3).First()
             });
@@ -204,7 +204,7 @@ namespace WebAPITeaApp.Models.DB
                 Name = "Пиалка №8",
                 Cost = 1200,
                 Description = "Пиалка, глина, глазурь",
-                ImageLink = "................",
+                ImageLink = "http://imperatormin.ru/u/product/card/5b1fbbbe8a22d.jpg",
                 Manufacter = context.Manufacters.Where(b => b.ManufacterId == 4).First(),
                 Category = context.Categories.Where(b => b.CategoryId == 4).First()
             });
@@ -215,7 +215,7 @@ namespace WebAPITeaApp.Models.DB
                 Name = "Сливник №5",
                 Cost = 500,
                 Description = "Стекло",
-                ImageLink = "................",
+                ImageLink = "http://imperatormin.ru/u/product/card/5bc2a95dc3c1d.jpg",
                 Manufacter = context.Manufacters.Where(b => b.ManufacterId == 4).First(),
                 Category = context.Categories.Where(b => b.CategoryId == 5).First()
             });
@@ -226,7 +226,7 @@ namespace WebAPITeaApp.Models.DB
                 Name = "Чабань №6",
                 Cost = 4500,
                 Description = "Чабань черная с узором, груша",
-                ImageLink = "................",
+                ImageLink = "http://imperatormin.ru/u/product/card/5bf10e8d79283.jpg",
                 Manufacter = context.Manufacters.Where(b => b.ManufacterId == 1).First(),
                 Category = context.Categories.Where(b => b.CategoryId == 6).First()
             });
@@ -237,7 +237,7 @@ namespace WebAPITeaApp.Models.DB
                 Name = "Фигурка Хотэй",
                 Cost = 500,
                 Description = "Чайная фигурка Хотэйя, нефрит",
-                ImageLink = "................",
+                ImageLink = "http://imperatormin.ru/u/product/card/5b58a99c1bc88.jpg",
                 Manufacter = context.Manufacters.Where(b => b.ManufacterId == 2).First(),
                 Category = context.Categories.Where(b => b.CategoryId == 7).First()
             });
@@ -250,8 +250,9 @@ namespace WebAPITeaApp.Models.DB
                 OrderId = Guid.NewGuid(),
                 DateTimeProperty = DateTime.Now,
                 //UserId = buf1.UserId
-                User = context.Users.Where(b => b.UserId == buf1.UserId).First(),
-                Items = context.Items.Where(b => b.Manufacter.ManufacterId == 2).ToList()
+                User = context.Users.Where(b => b.UserId == bufUser3.UserId).First(),
+                Items = context.Items.Where(b => b.Manufacter.ManufacterId == 2).ToList(),
+                State = "Создан"
             });
 
             // FOR DEBUG
