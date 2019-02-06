@@ -36,7 +36,7 @@ namespace WebAPITeaApp.Controllers
             {
                 return infoAboutUser;
             }
-           
+            
             if (infoFromDb != null)
             {
                 infoAboutUser = Mapper.Map<UserInfo, UserInfoDto>(infoFromDb);
@@ -107,27 +107,6 @@ namespace WebAPITeaApp.Controllers
 
             return Request.CreateResponse(HttpStatusCode.OK, "Ok");
        }
-
-       // REFRESH NOTE IN DB
-       //public string RefreshNoteInDb(UserDto userDto)
-       //{
-       //     UserInfo dataFromDb = new UserInfo();
-       //     dataFromDb = db.UsersInfo.Where(b => b.UserId == userDto.UserGuid).First();
-       //     Guid guiIdOfNoteToRemove = dataFromDb.GuidId;
-
-       //     db.UsersInfo.Remove(dataFromDb);
-
-       //     // Приводим НОВЫЕ ДАНННЫЕ К Виду допустимому к записи в БД
-       //     UserInfo refreshedData = Mapper.Map<UserDto, UserInfo>(userDto);
-
-       //     refreshedData.GuidId = guiIdOfNoteToRemove;
-
-       //     db.UsersInfo.Add(refreshedData);
-
-
-       //     return "Ok";
-       //}
-
 
     }
 }

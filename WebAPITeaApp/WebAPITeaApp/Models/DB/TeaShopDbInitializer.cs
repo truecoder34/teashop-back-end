@@ -263,21 +263,21 @@ namespace WebAPITeaApp.Models.DB
             {
                 PhotoId = Guid.NewGuid(),
                 LinkPhoto = "linkToPhoto1",
-                GuidId = bufItem1.GuidId
+                Item = bufItem1
             });
 
             context.Photos.Add(new Models.DB.Photo
             {
                 PhotoId = Guid.NewGuid(),
                 LinkPhoto = "linkToPhoto2",
-                GuidId = bufItem2.GuidId
+                Item = bufItem2
             });
 
             context.Photos.Add(new Models.DB.Photo
             {
                 PhotoId = Guid.NewGuid(),
                 LinkPhoto = "linkToPhoto3",
-                GuidId = bufItem3.GuidId
+                Item = bufItem3
             });
             context.SaveChanges();
         }

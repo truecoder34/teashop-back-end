@@ -28,7 +28,22 @@ namespace WebAPITeaApp.Controllers
         public IEnumerable<ItemDto> GetItems()
         {
             List<Item> itemsList = db.Items.ToList<Item>();
-            List<ItemDto> itemsDtoList = Mapper.Map<List<Item>, List<ItemDto>>(itemsList);
+
+            List<ItemDto> itemsDtoList = new List<ItemDto>();
+            foreach (Item elem in itemsList)
+            {
+                ItemDto bufNote = new ItemDto();
+                bufNote.GuidIdOfItem = elem.GuidId;
+                bufNote.Cost = elem.Cost;
+                bufNote.Name = elem.Name;
+                bufNote.Description = elem.Description;
+                bufNote.ImageLink = elem.ImageLink;
+                bufNote.CategoryId = elem.Category.CategoryId;
+                bufNote.ManufacterId = elem.Manufacter.ManufacterId;
+                itemsDtoList.Add(bufNote);
+            }
+
+            //List<ItemDto> itemsDtoList = Mapper.Map<List<Item>, List<ItemDto>>(itemsList);
             return itemsDtoList;
         }
 
@@ -40,9 +55,18 @@ namespace WebAPITeaApp.Controllers
         [Route("items/{id}")]
         public ItemDto GetItem(Guid id)
         {
-            var bufItem = db.Items.Where(b => b.GuidId == id).ToList();
-            ItemDto recievedFromDBItem = Mapper.Map<Item, ItemDto>(bufItem[0]);
-            return recievedFromDBItem;
+            var bufItem = db.Items.Where(b => b.GuidId == id).First();
+
+            ItemDto bufNote = new ItemDto();
+            bufNote.GuidIdOfItem = bufItem.GuidId;
+            bufNote.Cost = bufItem.Cost;
+            bufNote.Name = bufItem.Name;
+            bufNote.Description = bufItem.Description;
+            bufNote.ImageLink = bufItem.ImageLink;
+            bufNote.CategoryId = bufItem.Category.CategoryId;
+            bufNote.ManufacterId = bufItem.Manufacter.ManufacterId;
+            //ItemDto recievedFromDBItem = Mapper.Map<Item, ItemDto>(bufItem);
+            return bufNote;
         }
 
     }

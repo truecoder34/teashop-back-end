@@ -9,6 +9,7 @@ using WebAPITeaApp.Models.DB;
 using WebAPITeaApp.Dto;
 using System.Data.Entity.Migrations;
 using AutoMapper;
+using WebAPITeaApp.Models;
 
 namespace WebAPITeaApp.Controllers
 {
@@ -27,6 +28,19 @@ namespace WebAPITeaApp.Controllers
         {
             // Get itemDTO - Map to Item - Add to DB
             Item recievedFromAdminItem = Mapper.Map<ItemDto, Item>(itemDto);
+
+            //ItemDto bufNote = new ItemDto();
+            recievedFromAdminItem.GuidId = itemDto.GuidIdOfItem;
+            recievedFromAdminItem.Cost = itemDto.Cost;
+            recievedFromAdminItem.Name = itemDto.Name;
+            recievedFromAdminItem.Description = itemDto.Description;
+            recievedFromAdminItem.ImageLink = itemDto.ImageLink;
+
+            recievedFromAdminItem.Category = new Category();
+            recievedFromAdminItem.Manufacter = new Manufacter();
+
+            recievedFromAdminItem.Category.CategoryId = itemDto.CategoryId;
+            recievedFromAdminItem.Manufacter.ManufacterId = itemDto.ManufacterId;
 
             // temporarily decision = replace giud to prevent it being zero 
             Guid tempGuid = Guid.NewGuid();
@@ -55,7 +69,22 @@ namespace WebAPITeaApp.Controllers
             var bufPhotos = db.Photos.Where(b => b.PhotoId == bufItem.GuidId).ToList();
 
             // Get itemDTO - transform to DTO
-            Item recievedFromDBAndUpdatedItem = Mapper.Map<ItemDto, Item> (itemDto);
+            //Item recievedFromDBAndUpdatedItem = Mapper.Map<ItemDto, Item> (itemDto);
+
+            Item recievedFromDBAndUpdatedItem = new Item();
+            //ItemDto bufNote = new ItemDto();
+            //recievedFromDBAndUpdatedItem.GuidId = itemDto.GuidIdOfItem;
+            recievedFromDBAndUpdatedItem.Cost = itemDto.Cost;
+            recievedFromDBAndUpdatedItem.Name = itemDto.Name;
+            recievedFromDBAndUpdatedItem.Description = itemDto.Description;
+            recievedFromDBAndUpdatedItem.ImageLink = itemDto.ImageLink;
+
+            recievedFromDBAndUpdatedItem.Category = new Category();
+            recievedFromDBAndUpdatedItem.Manufacter = new Manufacter();
+
+            recievedFromDBAndUpdatedItem.Category.CategoryId = itemDto.CategoryId;
+            recievedFromDBAndUpdatedItem.Manufacter.ManufacterId = itemDto.ManufacterId;
+
             recievedFromDBAndUpdatedItem.GuidId = bufItem.GuidId;
 
             try
