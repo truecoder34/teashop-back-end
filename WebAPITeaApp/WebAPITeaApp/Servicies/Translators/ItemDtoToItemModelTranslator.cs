@@ -24,13 +24,13 @@ namespace WebAPITeaApp.Servicies.Translators
             base.Configure();
 
             Mapping
-                .ForMember(m => m.GuidId, o => o.MapFrom(m => m.GuidIdOfItem))
-                .ForMember(m => m.Cost, o => o.MapFrom(m => m.Cost))
-                .ForMember(m => m.Name, o => o.MapFrom(m => m.Name))
-                .ForMember(m => m.Description, o => o.MapFrom(m => m.Description))
-                .ForMember(m => m.ImageLink, o => o.MapFrom(m => m.ImageLink))
-                .ForMember(m => m.Category.CategoryId, o => o.MapFrom(m => m.CategoryId))
-                .ForMember(m => m.Manufacter.ManufacterId, o => o.MapFrom(m => m.ManufacterId));
+                .ForMember(m => m.GuidId,                   o => o.MapFrom(m => m.GuidIdOfItem))
+                .ForMember(m => m.Cost,                     o => o.MapFrom(m => m.Cost))
+                .ForMember(m => m.Name,                     o => o.MapFrom(m => m.Name))
+                .ForMember(m => m.Description,              o => o.MapFrom(m => m.Description))
+                .ForMember(m => m.ImageLink,                o => o.MapFrom(m => m.ImageLink))
+                .ForMember(m => m.Category.CategoryId,      o => o.MapFrom(m => m.CategoryId))
+                .ForMember(m => m.Manufacter.ManufacterId,  o => o.MapFrom(m => m.ManufacterId));
         }
     }
 }

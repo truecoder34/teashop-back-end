@@ -262,7 +262,10 @@
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Servicies\Translators\ItemDtoToItemModelTranslator.cs" />
     <Compile Include="Servicies\Translators\ItemModelToItemDtoTranslator.cs" />
+    <Compile Include="Servicies\Translators\OrderDtoToOrderModelTranlator.cs" />
     <Compile Include="Servicies\Translators\OrderModelToOrderDtoTranslator.cs" />
+    <Compile Include="Servicies\Translators\UserInfoDtoToUserInfoModelTranslator.cs" />
+    <Compile Include="Servicies\Translators\UserInfoModelToUserInfoDtoModel.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Translators\AutoMapperConfig.cs" />
     <Compile Include="Translators\AutomapperTranslator.cs" />
@@ -380,6 +383,8 @@
           <DevelopmentServerPort>5393</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:5393/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:2437/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

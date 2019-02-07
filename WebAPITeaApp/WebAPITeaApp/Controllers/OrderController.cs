@@ -52,9 +52,9 @@ namespace WebAPITeaApp.Controllers
             bufferOrder.User = db.Users.Where(b => b.UserId == orderDto.UserGuid).First();
             bufferOrder.State = "Создан";
 
-            foreach (var elem in orderDto.ItemsGuidsList)
+            foreach (var elem in orderDto.ItemsList)
             { 
-                bufferOrder.Items.Add(db.Items.Where(b => b.GuidId == elem).First());        
+                bufferOrder.Items.Add(db.Items.Where(b => b.GuidId == elem.GuidId).First());        
             }
             db.Orders.Add(bufferOrder);
             db.SaveChanges();
@@ -75,10 +75,10 @@ namespace WebAPITeaApp.Controllers
                 orderDto.DateTimeOfOrder = elem.DateTimeProperty;
                 orderDto.UserGuid = elem.User.UserId;
                 orderDto.State = elem.State;
-                orderDto.ItemsGuidsList = new List<Guid>();
+                orderDto.ItemsList = new List<Item>();
                 foreach (Item item in elem.Items)
                 {
-                    orderDto.ItemsGuidsList.Add(item.GuidId);
+                    orderDto.ItemsList.Add(item);
                 }
                 orderDtoList.Add(orderDto);
             }
@@ -98,10 +98,10 @@ namespace WebAPITeaApp.Controllers
                 orderDto.DateTimeOfOrder = elem.DateTimeProperty;
                 orderDto.UserGuid = elem.User.UserId;
                 orderDto.State = elem.State;
-                orderDto.ItemsGuidsList = new List<Guid>();
+                orderDto.ItemsList = new List<Item>();
                 foreach (Item item in elem.Items)
                 {
-                    orderDto.ItemsGuidsList.Add(item.GuidId);
+                    orderDto.ItemsList.Add(item);
                 }
                 orderDtoList.Add(orderDto);
             }

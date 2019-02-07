@@ -8,24 +8,27 @@ using WebAPITeaApp.Models.DB;
 
 namespace WebAPITeaApp.Commands
 {
-    public class CreateItemCommand : Command
+    public class CreateItemCommand<DTO, MODEL, DB> : Command
     {
-        EntityDto DTO { get; set; }
-        Entity Model { get; set; }
-        TeaShopContext Context { get; set; }
+        public DTO Dto { get; set; }
+        public MODEL Model { get; set; }
+        public DB DbContext { get; set; }
 
 
-        public CreateItemCommand(EntityDto dto, TeaShopContext db, Entity model)
+        public CreateItemCommand(DTO dto, MODEL model, DB db)
         {
-            DTO = dto;
+            Dto = dto;
             Model = model;
-            Context = db;
+            DbContext = db;
         }
 
         // execute method realization
         public override void Execute()
         {
-            //Item recievedFromAdminItem = Mapper.Map<ItemDto, Item>(dto);
+            // Transform from DTO type to MODEL type
+            MODEL itemToCreate = Mapper.Map<DTO, MODEL>(Dto);
+            DbContext.Add(itemToCreate);
+            DbContext.SaveChanges();
         }
     }
 }
