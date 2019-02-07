@@ -14,7 +14,7 @@ namespace WebAPITeaApp.Models.DB
         //public override Guid GuidId { get; set; }
 
         public float Cost { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; } 
         public string Description { get; set; }
         public string ImageLink { get; set; }
 
@@ -34,7 +34,10 @@ namespace WebAPITeaApp.Models.DB
         {
             this.Orders = new List<Order>();
             this.Photos = new List<Photo>();
+            this.Manufacter = new Manufacter();
+            this.Category = new Category();
         }
+
         public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<Photo> Photos { get; set; }
     }

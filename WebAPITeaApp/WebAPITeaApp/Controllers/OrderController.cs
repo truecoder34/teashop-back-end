@@ -24,16 +24,24 @@ namespace WebAPITeaApp.Controllers
         public HttpResponseMessage AddOrder([FromBody]  OrderDto orderDto)
         {
             // Get INFO about user from USERINFO table by userGuid, and put it into User Table
-            UserInfo userInfo = db.UsersInfo.Where(b => b.UserId == orderDto.UserGuid).First();
-            User userMakingOrder = new User();
-            userMakingOrder.UserId = userInfo.UserId;
-            userMakingOrder.Name = userInfo.Name;
-            userMakingOrder.Surname = userInfo.Surname;
-            userMakingOrder.Email = userInfo.Email;
-            userMakingOrder.AccessMod = 0;
+            try
+            {
+                UserInfo userInfo = db.UsersInfo.Where(b => b.UserId == orderDto.UserGuid).First();
+                User userMakingOrder = new User();
+                userMakingOrder.UserId = userInfo.UserId;
+                userMakingOrder.Name = userInfo.Name;
+                userMakingOrder.Surname = userInfo.Surname;
+                userMakingOrder.Email = userInfo.Email;
+                userMakingOrder.AccessMod = 0;
 
-            db.Users.Add(userMakingOrder);
-            db.SaveChanges();
+                db.Users.Add(userMakingOrder);
+                db.SaveChanges();
+            }
+            catch
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "No personal information about user");
+            }
+            
 
 
             // Put DATA in ORDERS table

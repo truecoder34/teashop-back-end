@@ -21,6 +21,7 @@ namespace WebAPITeaApp.Models.DB
         public Order()
         {
             this.Items = new List<Item>();
+            this.User = new User();
         }
 
         public virtual ICollection<Item> Items { get; set; }

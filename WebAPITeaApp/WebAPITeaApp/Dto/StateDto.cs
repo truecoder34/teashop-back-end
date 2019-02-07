@@ -5,7 +5,7 @@ using System.Web;
 
 namespace WebAPITeaApp.Dto
 {
-    public class StateDto
+    public class StateDto : EntityDto
     {
         public Guid OrderId { get; set; }
         public string State { get; set; }

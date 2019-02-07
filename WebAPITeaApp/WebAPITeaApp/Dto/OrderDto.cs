@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebAPITeaApp.Models.DB;
 
 namespace WebAPITeaApp.Dto
 {
@@ -10,7 +11,7 @@ namespace WebAPITeaApp.Dto
         public Guid UserGuid { get; set; }
         public DateTime DateTimeOfOrder { get; set; }
 
-        public ICollection<Guid> ItemsGuidsList { get; set; }
+        public ICollection<Item> ItemsList { get; set; }
 
         public string State { get; set; }
 

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace WebAPITeaApp.Dto
 {
-    public class UserInfoDto
+    public class UserInfoDto : EntityDto
     {
         // NON REQUIRD FIELDS to WORK with fields in table UsersInfo OR Users
         public string Name { get; set; }
