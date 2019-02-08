@@ -259,6 +259,8 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
+    <Compile Include="Repository\DbRepositorySQL.cs" />
+    <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Servicies\Translators\ItemDtoToItemModelTranslator.cs" />
     <Compile Include="Servicies\Translators\ItemModelToItemDtoTranslator.cs" />
