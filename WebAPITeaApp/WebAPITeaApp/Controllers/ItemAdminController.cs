@@ -10,6 +10,8 @@ using WebAPITeaApp.Dto;
 using System.Data.Entity.Migrations;
 using AutoMapper;
 using WebAPITeaApp.Models;
+using WebAPITeaApp.Commands;
+using WebAPITeaApp.Repository;
 
 namespace WebAPITeaApp.Controllers
 {
@@ -19,42 +21,60 @@ namespace WebAPITeaApp.Controllers
     public class ItemAdminController : ApiController
     {
         //Connect to DataBase
-        TeaShopContext db = new TeaShopContext();
+        static TeaShopContext dbContext = new TeaShopContext();
+        // repository object 
+        DbRepositorySQL<Item> repository = new DbRepositorySQL<Item>(dbContext);
 
         // Add new Item
         [HttpPost]
         [Route("items")]
         public HttpResponseMessage AddItem([FromBody] ItemDto itemDto)
         {
-            // Get itemDTO - Map to Item - Add to DB
-            Item recievedFromAdminItem = Mapper.Map<ItemDto, Item>(itemDto);
-
-            //ItemDto bufNote = new ItemDto();
-            recievedFromAdminItem.GuidId = itemDto.GuidIdOfItem;
-            recievedFromAdminItem.Cost = itemDto.Cost;
-            recievedFromAdminItem.Name = itemDto.Name;
-            recievedFromAdminItem.Description = itemDto.Description;
-            recievedFromAdminItem.ImageLink = itemDto.ImageLink;
-
-            recievedFromAdminItem.Category = new Category();
-            recievedFromAdminItem.Manufacter = new Manufacter();
-
-            recievedFromAdminItem.Category.CategoryId = itemDto.CategoryId;
-            recievedFromAdminItem.Manufacter.ManufacterId = itemDto.ManufacterId;
-
-            // temporarily decision = replace giud to prevent it being zero 
-            Guid tempGuid = Guid.NewGuid();
-            recievedFromAdminItem.GuidId = tempGuid;
+            Item itemToInsert = new Item();
+            // Call command create
             try
             {
-                db.Items.Add(recievedFromAdminItem);
-                db.SaveChanges();
-                return Request.CreateResponse(HttpStatusCode.OK, tempGuid);
+                CreateItemCommand<ItemDto, Item> CreateItem = new CreateItemCommand<ItemDto, Item>(itemDto, itemToInsert, repository);
+                CreateItem.Execute();
+                //return Request.CreateResponse(HttpStatusCode.OK, tempGuid);
+                return Request.CreateResponse(HttpStatusCode.OK, "New item added OK");
             }
             catch
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Error");
             }
+            
+
+
+            // Get itemDTO - Map to Item - Add to DB
+            //Item recievedFromAdminItem = Mapper.Map<ItemDto, Item>(itemDto);
+
+            ////ItemDto bufNote = new ItemDto();
+            //recievedFromAdminItem.GuidId = itemDto.GuidIdOfItem;
+            //recievedFromAdminItem.Cost = itemDto.Cost;
+            //recievedFromAdminItem.Name = itemDto.Name;
+            //recievedFromAdminItem.Description = itemDto.Description;
+            //recievedFromAdminItem.ImageLink = itemDto.ImageLink;
+
+            //recievedFromAdminItem.Category = new Category();
+            //recievedFromAdminItem.Manufacter = new Manufacter();
+
+            //recievedFromAdminItem.Category.CategoryId = itemDto.CategoryId;
+            //recievedFromAdminItem.Manufacter.ManufacterId = itemDto.ManufacterId;
+
+            //// temporarily decision = replace giud to prevent it being zero 
+            //Guid tempGuid = Guid.NewGuid();
+            //recievedFromAdminItem.GuidId = tempGuid;
+            //try
+            //{
+            //    dbContext.Items.Add(recievedFromAdminItem);
+            //    dbContext.SaveChanges();
+            //    return Request.CreateResponse(HttpStatusCode.OK, tempGuid);
+            //}
+            //catch
+            //{
+            //    return Request.CreateResponse(HttpStatusCode.BadRequest, "Error");
+            //}
         }
 
         // UPDATE CURRENT ITEM
@@ -64,9 +84,9 @@ namespace WebAPITeaApp.Controllers
         public HttpResponseMessage UpdateItem(Guid id, [FromBody] ItemDto itemDto)
         {
             // Get NOTE from tb.ITMENS by ID , type from DB - ITEM 
-            var bufItem = db.Items.Where(b => b.GuidId == id).First();
+            var bufItem = dbContext.Items.Where(b => b.GuidId == id).First();
 
-            var bufPhotos = db.Photos.Where(b => b.PhotoId == bufItem.GuidId).ToList();
+            var bufPhotos = dbContext.Photos.Where(b => b.PhotoId == bufItem.GuidId).ToList();
 
             // Get itemDTO - transform to DTO
             //Item recievedFromDBAndUpdatedItem = Mapper.Map<ItemDto, Item> (itemDto);
@@ -89,8 +109,8 @@ namespace WebAPITeaApp.Controllers
 
             try
             {
-                db.Items.Remove(bufItem);
-                db.Items.Add(recievedFromDBAndUpdatedItem);
+                dbContext.Items.Remove(bufItem);
+                dbContext.Items.Add(recievedFromDBAndUpdatedItem);
 
                 foreach (Photo elem in bufPhotos)
                 {
@@ -99,11 +119,11 @@ namespace WebAPITeaApp.Controllers
                     photoUpdated.LinkPhoto = elem.LinkPhoto;
                     photoUpdated.PhotoId = elem.PhotoId;
 
-                    db.Photos.Remove(bufPhotos[0]);
-                    db.Photos.Add(photoUpdated);
+                    dbContext.Photos.Remove(bufPhotos[0]);
+                    dbContext.Photos.Add(photoUpdated);
                 }
 
-                db.SaveChanges();
+                dbContext.SaveChanges();
                 return Request.CreateResponse(HttpStatusCode.OK, "Ok");
             }
             catch
@@ -120,18 +140,18 @@ namespace WebAPITeaApp.Controllers
         public HttpResponseMessage DeleteItem(Guid id)
         {
             // Get NOTE from tb.ITMENS by ID
-            var bufItem = db.Items.Where(b => b.GuidId == id).First();
-            var bufPhotos = db.Photos.Where(b => b.PhotoId == bufItem.GuidId).ToList();
+            var bufItem = dbContext.Items.Where(b => b.GuidId == id).First();
+            var bufPhotos = dbContext.Photos.Where(b => b.PhotoId == bufItem.GuidId).ToList();
 
             try
             {
-                db.Items.Remove(bufItem);
+                dbContext.Items.Remove(bufItem);
                 foreach(Photo elem in bufPhotos)
                 {
-                    db.Photos.Remove(bufPhotos[0]);
+                    dbContext.Photos.Remove(bufPhotos[0]);
                 }
-                
-                db.SaveChanges();
+
+                dbContext.SaveChanges();
                 return Request.CreateResponse(HttpStatusCode.OK, "Ok");
             }
             catch
