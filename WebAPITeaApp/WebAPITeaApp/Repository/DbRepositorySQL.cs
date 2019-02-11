@@ -8,7 +8,7 @@ using WebAPITeaApp.Models.DB;
 namespace WebAPITeaApp.Repository
 {
     public class DbRepositorySQL<TEntity> : IRepository<TEntity>
-        where TEntity : class
+        where TEntity : Entity
     {
         // 
         private TeaShopContext _contextDb;
@@ -38,10 +38,23 @@ namespace WebAPITeaApp.Repository
             _contextDb.SaveChanges();
         }
 
-        public void Update(TEntity note)
+        public void Update(TEntity note, Guid id)
         {
-            _contextDb.Entry(note).State = EntityState.Modified;
-            _contextDb.SaveChanges();
+            TEntity noteExisting = _dbSet.Find(id);
+            try
+            {
+                if (noteExisting != null)
+                {
+                    _contextDb.Entry(noteExisting).CurrentValues.SetValues(note);
+                    //_contextDb.Entry(note).State = EntityState.Modified;
+                    _contextDb.SaveChanges();
+                }
+                    
+            }
+            catch
+            {
+
+            }
         }
 
         public void Delete(Guid id)

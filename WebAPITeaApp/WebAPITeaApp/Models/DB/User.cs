@@ -9,9 +9,9 @@ using System.Linq.Expressions;
 
 namespace WebAPITeaApp.Models.DB
 {
-    public partial class User
+    public partial class User : Entity
     {
-        [Key]
+        //[Key]
         public Guid UserId { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }

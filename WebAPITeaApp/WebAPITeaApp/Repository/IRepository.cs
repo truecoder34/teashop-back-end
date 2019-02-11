@@ -12,7 +12,7 @@ namespace WebAPITeaApp.Repository
         IEnumerable<TEntity> GetList();
         TEntity GetNote(Guid id);
         void Create(TEntity note);
-        void Update(TEntity note);
+        void Update(TEntity note, Guid id);
         void Remove(TEntity note);
         void Delete(Guid id); // удаление объекта по id
         void Save();  // сохранение изменений

@@ -7,10 +7,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebAPITeaApp.Models.DB
 {
-    public partial class Order 
+    public partial class Order : Entity
     {
         // PK - field, UNIQUE ID of ORDER
-        [Key]
+        
         public Guid OrderId { get; set; }
         public string State { get; set; }
         public DateTime DateTimeProperty { get; set; }

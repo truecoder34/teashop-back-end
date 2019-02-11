@@ -7,9 +7,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebAPITeaApp.Models.DB
 {
-    public partial class Photo
+    public partial class Photo : Entity
     {
-        [Key]
+        
         public Guid PhotoId { get; set; }
         public string LinkPhoto { get; set; }
         //public string Name_Photo { get; set; }
