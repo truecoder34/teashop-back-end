@@ -10,13 +10,13 @@ namespace WebAPITeaApp.Models.DB
     public partial class Photo
     {
         [Key]
-        public int PhotoId { get; set; }
+        public Guid PhotoId { get; set; }
         public string LinkPhoto { get; set; }
         //public string Name_Photo { get; set; }
 
         // MANY Photo - One Item
-        public Nullable<int> ItemId { get; set; }
-        [ForeignKey("ItemId")]
+        //public Guid GuidId { get; set; }
+        //[ForeignKey("GuidId")]
         public virtual Item Item { get; set; }
     }
 }

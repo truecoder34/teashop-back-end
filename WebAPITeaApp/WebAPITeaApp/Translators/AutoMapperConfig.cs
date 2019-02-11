@@ -15,6 +15,9 @@ namespace WebAPITeaApp.Translators
             Mapper.Initialize((config) =>
             {
                 config.CreateMap<Item, ItemDto>().ReverseMap();
+                config.CreateMap<OrderDto, Order>().ReverseMap();
+                config.CreateMap<UserInfo, UserInfoDto>().ReverseMap();
+                config.CreateMap<UserInfoDto, UserInfo>().ReverseMap();
             });
         }
     }

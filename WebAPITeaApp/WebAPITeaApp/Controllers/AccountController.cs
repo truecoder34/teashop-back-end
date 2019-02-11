@@ -7,6 +7,7 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.ModelBinding;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -14,6 +15,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
+using WebAPITeaApp.Dto;
 using WebAPITeaApp.Models;
 using WebAPITeaApp.Providers;
 using WebAPITeaApp.Results;
@@ -21,11 +23,13 @@ using WebAPITeaApp.Results;
 namespace WebAPITeaApp.Controllers
 {
     [Authorize]
-    [RoutePrefix("api/Account")]
-    public class AccountController : BaseApiController
+    [RoutePrefix("api/account")]
+    public class AccountController : ApiController
     {
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
+
+        ApplicationDbContext db = new ApplicationDbContext();
 
         public AccountController()
         {
@@ -51,6 +55,33 @@ namespace WebAPITeaApp.Controllers
         }
 
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
+
+        // getRole by UserName
+        [HttpPost]
+        [Route("role")]
+        public IHttpActionResult GetItem([FromBody] UserDto user)
+        {
+            string userName = user.UserName;
+            var userFromDb = db.Users.Where(b => b.UserName == userName).ToList();
+            var listOfRoles = userFromDb[0].Roles.ToList();
+
+            var rolesFromDb = db.Roles.ToList();
+            string userRoleId = rolesFromDb[1].Id;
+            string adminRoleId = rolesFromDb[0].Id;
+
+
+
+
+            if (listOfRoles[0].RoleId == adminRoleId)
+            {
+                return Ok(new { Role = "Admin", UserId = userFromDb[0].Id });
+            }
+            else
+            {
+                return Ok(new { Role = "User", UserId = userFromDb[0].Id });
+            }
+
+        }
 
         // GET api/Account/UserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
@@ -319,9 +350,9 @@ namespace WebAPITeaApp.Controllers
             return logins;
         }
 
-        // POST api/Account/Register
+        // POST api/account/register
         [AllowAnonymous]
-        [Route("Register")]
+        [Route("register")]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
             if (!ModelState.IsValid)
@@ -337,9 +368,22 @@ namespace WebAPITeaApp.Controllers
             {
                 return GetErrorResult(result);
             }
+            else
+            {
+                if(model.Role == "Admin")
+                {
+                    UserManager.AddToRole(user.Id,"Admin");
+                }
+                else
+                {
+                    UserManager.AddToRole(user.Id, "User");
+                }
+            }
 
             return Ok();
         }
+
+        // 
 
         // POST api/Account/RegisterExternal
         [OverrideAuthentication]
@@ -371,50 +415,6 @@ namespace WebAPITeaApp.Controllers
             {
                 return GetErrorResult(result); 
             }
-            return Ok();
-        }
-
-        // STEP 5 -  Allow Admin to Manage Single User Roles
-        [Authorize(Roles = "Admin")]
-        [Route("user/{id:guid}/roles")]
-        [HttpPut]
-        public async Task<IHttpActionResult> AssignRolesToUser([FromUri] string id, [FromBody] string[] rolesToAssign)
-        {
-
-            var appUser = await this.AppUserManager.FindByIdAsync(id);
-
-            if (appUser == null)
-            {
-                return NotFound();
-            }
-
-            var currentRoles = await this.AppUserManager.GetRolesAsync(appUser.Id);
-
-            var rolesNotExists = rolesToAssign.Except(this.AppRoleManager.Roles.Select(x => x.Name)).ToArray();
-
-            if (rolesNotExists.Count() > 0)
-            {
-
-                ModelState.AddModelError("", string.Format("Roles '{0}' does not exixts in the system", string.Join(",", rolesNotExists)));
-                return BadRequest(ModelState);
-            }
-
-            IdentityResult removeResult = await this.AppUserManager.RemoveFromRolesAsync(appUser.Id, currentRoles.ToArray());
-
-            if (!removeResult.Succeeded)
-            {
-                ModelState.AddModelError("", "Failed to remove user roles");
-                return BadRequest(ModelState);
-            }
-
-            IdentityResult addResult = await this.AppUserManager.AddToRolesAsync(appUser.Id, rolesToAssign);
-
-            if (!addResult.Succeeded)
-            {
-                ModelState.AddModelError("", "Failed to add user roles");
-                return BadRequest(ModelState);
-            }
-
             return Ok();
         }
 
@@ -533,6 +533,8 @@ namespace WebAPITeaApp.Controllers
                 return HttpServerUtility.UrlTokenEncode(data);
             }
         }
+
+
 
         #endregion
     }

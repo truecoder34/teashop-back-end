@@ -19,12 +19,21 @@ namespace WebAPITeaApp
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
             var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
+
+            var appRoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context.Get<ApplicationDbContext>()));
+
+            // СОЗДАЛ РОЛИИИИИ
+            var roleResult = appRoleManager.Create(new IdentityRole("Admin"));
+            roleResult = appRoleManager.Create(new IdentityRole("User"));
+
             // Настройка логики проверки имен пользователей
             manager.UserValidator = new UserValidator<ApplicationUser>(manager)
             {
                 AllowOnlyAlphanumericUserNames = false,
                 RequireUniqueEmail = true
             };
+
+            
             // Настройка логики проверки паролей
             manager.PasswordValidator = new PasswordValidator
             {
