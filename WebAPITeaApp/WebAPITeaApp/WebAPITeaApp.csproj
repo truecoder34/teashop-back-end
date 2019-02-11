@@ -227,7 +227,11 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Commands\Command.cs" />
+    <Compile Include="Commands\CommandResult.cs" />
     <Compile Include="Commands\CreateItemCommand.cs" />
+    <Compile Include="Commands\ICommandCommonResult.cs" />
+    <Compile Include="Commands\ICommandCoommonResultData.cs" />
+    <Compile Include="Commands\UpdateItemCommand.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ItemAdminController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
